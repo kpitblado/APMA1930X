@@ -1,0 +1,52 @@
+def min_coins(coins, x):
+    # Create an array to store the minimum number of coins needed for each value from 0 to x
+    dp = [float('inf')] * (x + 1)
+    dp[0] = 0  # 0 coins needed to make a sum of 0
+    
+    # Create an array to store the selected coins for each value from 0 to x
+    coin_selection = [-1] * (x + 1)
+    
+    # Iterate through each coin denomination
+    for coin in coins:
+        # Update the dp array and coin_selection for each value from coin to x
+        for i in range(coin, x + 1):
+            if dp[i - coin] + 1 < dp[i]:
+                dp[i] = dp[i - coin] + 1
+                coin_selection[i] = coin
+    
+    # Initialize the coin sequence with zeros
+    coin_sequence = [0] * len(coins)
+    
+    # Trace back to find the coin sequence for x
+    remaining = x
+    while remaining > 0:
+        coin = coin_selection[remaining]
+        coin_index = coins.index(coin)
+        coin_sequence[coin_index] += 1
+        remaining -= coin
+    
+    return dp[x], coin_sequence
+
+# Test cases
+coins1 = [1, 6, 10]
+x1 = 13
+result1 = min_coins(coins1, x1)
+print("Output for (a):", result1[0])
+print("Output for (b):", result1[1])
+
+#Test Case 1:
+
+#Output for (a): 3
+#Output for (b): [1, 2, 0]
+
+coins2 = [1, 1930, 2023]
+x2 = 1000000
+result2 = min_coins(coins2, x2)
+
+#Test Case 1:
+
+#Output for (a): 505
+#Output for (b): [10, 15, 480]
+
+print("Output for (a):", result2[0])
+print("Output for (b):", result2[1])
