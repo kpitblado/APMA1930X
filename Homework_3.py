@@ -13,15 +13,15 @@ def f(x):
 matrix_size = N + 1
 duck_walk_matrix = np.zeros((matrix_size, matrix_size), dtype=float)
 
-#Makes the duck walk matrix based on the parameters
+# Makes the duck walk matrix based on the parameters
 for i in range(matrix_size):
     counter = i*-1
     for j in range(matrix_size):
-        if(j > i):
-            duck_walk_matrix[i,j] = 0
+        if (j > i):
+            duck_walk_matrix[i, j] = 0
         else:
-            duck_walk_matrix[i,j] = f(counter)
-            counter = counter + 2        
+            duck_walk_matrix[i, j] = f(counter)
+            counter = counter + 2
 
 strategy_matrix = np.zeros((matrix_size, matrix_size), dtype=str)
 print(duck_walk_matrix)
@@ -29,20 +29,19 @@ print(duck_walk_matrix)
 # Fill in the strategy matrix and compute the value of v
 v = np.zeros(matrix_size)
 
-
-for i in range(N , -1, -1):
+for i in range(N, -1, -1):
     for j in range(matrix_size):
-        if(i == N):
-            #Bottom row as 1s
-            strategy_matrix[i,j] = str(1)
-        elif(j > i):
-            #If outside matrix put *
-            strategy_matrix[i,j] = "*"
+        if (i == N):
+            # Bottom row as 1s
+            strategy_matrix[i, j] = str(1)
+        elif (j > i):
+            # If outside matrix put *
+            strategy_matrix[i, j] = "*"
         else:
-            #Find continue value    
+            # Find continue value
             continue_value = (
                 q * duck_walk_matrix[i+1][j]) + (p * duck_walk_matrix[i+1][j+1])
-            #Update strategy matrix accordingly
+            # Update strategy matrix accordingly
             best_value = max(duck_walk_matrix[i][j], continue_value)
             if best_value == duck_walk_matrix[i][j]:
                 strategy_matrix[i][j] = str(1)
