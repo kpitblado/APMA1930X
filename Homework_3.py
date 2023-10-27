@@ -1,5 +1,4 @@
 import numpy as np
-from math import comb
 
 # Parameters
 p = 0.4
@@ -26,8 +25,6 @@ for i in range(matrix_size):
 
 strategy_matrix = np.zeros((matrix_size, matrix_size), dtype=str)
 print(duck_walk_matrix)
-
-
 
 # Fill in the strategy matrix and compute the value of v
 v = np.zeros(matrix_size)
