@@ -33,18 +33,22 @@ v = np.zeros(matrix_size)
 for i in range(N , -1, -1):
     for j in range(matrix_size):
         if(i == N):
+            #Bottom row as 1s
             strategy_matrix[i,j] = str(1)
         elif(j > i):
+            #If outside matrix put *
             strategy_matrix[i,j] = "*"
-        else:    
+        else:
+            #Find continue value    
             continue_value = (
                 q * duck_walk_matrix[i+1][j]) + (p * duck_walk_matrix[i+1][j+1])
+            #Update strategy matrix accordingly
             best_value = max(duck_walk_matrix[i][j], continue_value)
             if best_value == duck_walk_matrix[i][j]:
                 strategy_matrix[i][j] = str(1)
             else:
                 strategy_matrix[i][j] = str(0)
-            
+
             duck_walk_matrix[i][j] = best_value
 
 
